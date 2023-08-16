@@ -1,0 +1,11 @@
+﻿version: '3.8'
+
+services:
+  sipcallback:
+    image: sipcallback
+    container_name: sipcallback
+    ports:
+      - "5209:80"
+    build:
+      context: .
+      dockerfile: SipCallback/Dockerfile

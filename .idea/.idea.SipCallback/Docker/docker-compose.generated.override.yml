@@ -1,0 +1,24 @@
+# This is a generated file. Not intended for manual editing.
+version: "3.8"
+services:
+  sipcallback:
+    build:
+      context: "C:\\Users\\talashmanovau\\source\\repos\\SipCallback"
+      dockerfile: "SipCallback/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net7.0/SipCallback.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      NUGET_PACKAGES: "C:\\Users\\talashmanovau\\.nuget\\packages"
+      NUGET_FALLBACK_PACKAGES: "C:\\Users\\talashmanovau\\.nuget\\packages"
+    image: "sipcallback:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\talashmanovau\\.nuget\\packages:/root/.nuget/fallbackpackages"
+    - "C:\\Users\\talashmanovau\\source\\repos\\SipCallback\\SipCallback:/app:rw"
+    - "C:\\Users\\talashmanovau\\source\\repos\\SipCallback:/src:rw"
+    working_dir: "/app"
