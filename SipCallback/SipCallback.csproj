@@ -12,17 +12,17 @@
         <PackageReference Include="FluentValidation" Version="11.7.1"/>
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1"/>
         <PackageReference Include="IL.FluentValidation.Extensions.Options" Version="11.0.2"/>
+        <PackageReference Include="LinqToLdap" Version="5.0.0"/>
         <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0"/>
+        <PackageReference Include="System.DirectoryServices.Protocols" Version="7.0.1"/>
         <PackageReference Include="Telegram.Bot" Version="19.0.0"/>
     </ItemGroup>
 
 
-
-
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
 

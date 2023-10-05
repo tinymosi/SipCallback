@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace SipCallback.Yealink.Cache;
@@ -12,9 +13,10 @@ public static class MemoryCacheExtensions
 		return cache.Set(entry.Key, entry, absoluteExpirationRelativeToNow);
 	}
 
-	public static bool TryGetValue(this IMemoryCache cache, CallCacheEntry searchEntry, out CallCacheEntry? value)
+	public static bool TryGetValue(this IMemoryCache cache, CallCacheEntry searchEntry, [NotNullWhen(true)] out CallCacheEntry? value)
 	{
 		if (cache.TryGetValue(searchEntry.Key, out object? result))
+		{
 			switch (result)
 			{
 				case null:
@@ -24,6 +26,7 @@ public static class MemoryCacheExtensions
 					value = entry;
 					return true;
 			}
+		}
 
 		value = default;
 		return false;
