@@ -8,17 +8,29 @@ services:
       target: "base"
     command: []
     entrypoint:
-    - "dotnet"
-    - "/app/bin/Debug/net7.0/SipCallback.dll"
+    - "/riderDebugger/linux-x64/dotnet/dotnet"
+    - "/riderDebugger/JetBrains.Debugger.Worker.exe"
+    - "--mode=server"
+    - "--frontend-port=57100"
+    - "--backend-port=57300"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
       NUGET_PACKAGES: "C:\\Users\\talashmanovau\\.nuget\\packages"
       NUGET_FALLBACK_PACKAGES: "C:\\Users\\talashmanovau\\.nuget\\packages"
+      RIDER_DEBUGGER_LOG_DIR: "/riderLogs"
+      RESHARPER_LOG_CONF: "/riderLogsConf/backend-log.xml"
     image: "sipcallback:dev"
-    ports: []
+    ports:
+    - "127.0.0.1:57003:57100"
+    - "127.0.0.1:57203:57300"
     volumes:
     - "C:\\Users\\talashmanovau\\.nuget\\packages:/root/.nuget/fallbackpackages"
     - "C:\\Users\\talashmanovau\\source\\repos\\SipCallback\\SipCallback:/app:rw"
     - "C:\\Users\\talashmanovau\\source\\repos\\SipCallback:/src:rw"
+    - "C:\\Users\\talashmanovau\\AppData\\Local\\JetBrains\\RiderRemoteDebugger\\\
+      2023.2.2\\Linux64:/riderDebugger"
+    - "C:\\Users\\talashmanovau\\AppData\\Local\\Programs\\Rider/bin:/riderLogsConf"
+    - "C:\\Users\\talashmanovau\\AppData\\Local\\JetBrains\\Rider2023.2\\log\\DebuggerWorker\\\
+      JetBrains.Debugger.Worker.2023_10_05_08_40_27:/riderLogs:rw"
     working_dir: "/app"

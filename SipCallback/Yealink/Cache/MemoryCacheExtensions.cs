@@ -21,7 +21,7 @@ public static class MemoryCacheExtensions
 			{
 				case null:
 					value = default;
-					return true;
+					return false;
 				case CallCacheEntry entry:
 					value = entry;
 					return true;

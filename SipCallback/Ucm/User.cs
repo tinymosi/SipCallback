@@ -18,10 +18,10 @@ public class User
 public class UserMap : ClassMap<User>
 {
 	public override IClassMap PerformMapping(
-		string namingContext = null,
-		string objectCategory = null,
+		string? namingContext = null,
+		string? objectCategory = null,
 		bool includeObjectCategory = true,
-		IEnumerable<string> objectClasses = null,
+		IEnumerable<string>? objectClasses = null,
 		bool includeObjectClasses = true)
 	{
 		NamingContext("OU=pbx,DC=pbx,DC=com");
