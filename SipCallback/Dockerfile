@@ -1,7 +1,12 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+﻿FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
+
+#install LDAP dependencies for System.DirectoryServices 
+RUN apk update \
+    && apk add --upgrade libldap \
+    && ln -s libldap.so.2 /usr/lib/libldap-2.4.so.2
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src

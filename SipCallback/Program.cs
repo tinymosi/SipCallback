@@ -1,8 +1,8 @@
-using System.DirectoryServices.Protocols;
 using IL.FluentValidation.Extensions.Options;
 using LinqToLdap;
 using Microsoft.AspNetCore.Mvc;
 using SipCallback.Options;
+using SipCallback.Services;
 using SipCallback.Ucm;
 using SipCallback.Yealink;
 
@@ -26,32 +26,10 @@ builder.Services
 	.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true)
 	.AddScoped<TelegramNotificationHandler>();
 
-
-builder.Services.AddSingleton<ILdapConfiguration>(_ =>
-{
-	var ldapOptions = new LdapOptions();
-	builder.Configuration.Bind(LdapOptions.SectionName, ldapOptions);
-
-	var ldapConfig = new LdapConfiguration();
-	ldapConfig
-		.DisablePaging()
-		.AddMapping(new UserMap())
-		.ConfigureFactory(ldapOptions.Server)
-		.AuthenticateBy(AuthType.Anonymous)
-		.UsePort(ldapOptions.Port)
-		.ProtocolVersion(ldapOptions.ProtocolVersion);
-
-	return ldapConfig;
-});
-
-builder.Services.AddTransient<IDirectoryContext>(provider =>
-{
-	var ldapConfiguration = provider.GetRequiredService<ILdapConfiguration>();
-
-	return new DirectoryContext(ldapConfiguration);
-});
-
-builder.Services.AddTransient<Ldap>();
+builder.Services
+	.AddSingleton<ILdapConfiguration, CustomLdapConfiguration>()
+	.AddTransient<IDirectoryContext, CustomDirectoryContext>()
+	.AddTransient<Ldap>();
 
 builder.WebHost
 	.UseKestrel(options => options.ConfigureEndpointDefaults(listenOptions => listenOptions.UseConnectionLogging()));
