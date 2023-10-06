@@ -54,7 +54,7 @@ public class TelegramNotificationHandler
 	{
 		const string messageTemplate = "Missed call from {0}[{1}] to {2}";
 
-		if (_cache.TryGetValue(new CallCacheEntry(model.ActiveUser, model.CalledNumber), out CallCacheEntry? entry))
+		if (_cache.TryGetValue(new CallCacheEntry(model.CalledNumber, model.ActiveUser), out CallCacheEntry? entry))
 		{
 			string message = string.Format(messageTemplate, entry.Username, entry.Caller, entry.Callee);
 
