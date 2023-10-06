@@ -46,7 +46,7 @@ public class TelegramNotificationHandler
 
 		var result = await _bot.SendTextMessageAsync(_options.Value.ChatId, message, disableNotification: true, cancellationToken: ct);
 
-		var cacheEntry = new CallCacheEntry(model.ActiveUser, model.CalledNumber, username, result.MessageId);
+		var cacheEntry = new CallCacheEntry(model.CalledNumber, model.ActiveUser, username, result.MessageId);
 		_cache.Set(cacheEntry, TimeSpan.FromSeconds(30));
 	}
 
