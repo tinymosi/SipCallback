@@ -72,7 +72,7 @@ public class TelegramNotificationHandler
 
 	public async Task HandleAnsweredCallAsync(AnsweredCall model, CancellationToken ct = default)
 	{
-		if (_cache.TryGetValue(new CallCacheEntry(model.ActiveUser, model.CalledNumber), out CallCacheEntry? entry))
+		if (_cache.TryGetValue(new CallCacheEntry(model.CalledNumber, model.ActiveUser), out CallCacheEntry? entry))
 		{
 			await _bot.DeleteMessageAsync(_options.Value.ChatId, entry.MessageId!.Value, ct);
 			_cache.Remove(entry);
