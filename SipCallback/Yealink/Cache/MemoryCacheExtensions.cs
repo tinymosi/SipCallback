@@ -20,7 +20,7 @@ public static class MemoryCacheExtensions
 			switch (result)
 			{
 				case null:
-					value = default;
+					value = null;
 					return false;
 				case CallCacheEntry entry:
 					value = entry;
@@ -28,11 +28,11 @@ public static class MemoryCacheExtensions
 			}
 		}
 
-		value = default;
+		value = null;
 		return false;
 	}
 
-	public static void Remove(this IMemoryCache cache, CallCacheEntry entry)
+	public static void RemoveCallEntry(this IMemoryCache cache, CallCacheEntry entry)
 	{
 		cache.Remove(entry.Key);
 	}
