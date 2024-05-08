@@ -4,7 +4,7 @@ namespace SipCallback.Services;
 
 public class CustomDirectoryContext : DirectoryContext
 {
-	public CustomDirectoryContext(ILdapConfiguration ldapConfiguration) : base(ldapConfiguration)
-	{
-	}
+    public CustomDirectoryContext(ILdapConfiguration ldapConfiguration) : base(ldapConfiguration)
+    {
+    }
 }

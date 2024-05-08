@@ -2,5 +2,5 @@
 
 public record CallCacheEntry(int Caller, int Callee, string? Username = null, int? MessageId = null)
 {
-	public string Key => $"call:{Caller}-{Callee}";
+    public string Key => $"call:{Caller}-{Callee}";
 }

@@ -2,20 +2,20 @@
 using LinqToLdap;
 using Microsoft.Extensions.Options;
 using SipCallback.Options;
-using SipCallback.Ucm;
+using SipCallback.UserProvider.Ucm;
 
 namespace SipCallback.Services;
 
 public class CustomLdapConfiguration : LdapConfiguration
 {
-	public CustomLdapConfiguration(IOptions<LdapOptions> ldapOptions)
-	{
-		DisablePaging();
-		AddMapping(new UserMap());
+    public CustomLdapConfiguration(IOptions<LdapOptions> ldapOptions)
+    {
+        DisablePaging();
+        AddMapping(new UserMap());
 
-		ConfigureFactory(ldapOptions.Value.Server)
-			.AuthenticateBy(AuthType.Anonymous)
-			.UsePort(ldapOptions.Value.Port)
-			.ProtocolVersion(ldapOptions.Value.ProtocolVersion);
-	}
+        ConfigureFactory(ldapOptions.Value.Server)
+            .AuthenticateBy(AuthType.Anonymous)
+            .UsePort(ldapOptions.Value.Port)
+            .ProtocolVersion(ldapOptions.Value.ProtocolVersion);
+    }
 }
